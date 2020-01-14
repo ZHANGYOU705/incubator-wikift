@@ -1,0 +1,96 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!-- 评论编辑器富文本版 -->
+<div th:fragment="common-details-comment-rich">
+    <div th:if="${session.userInfo}">
+        <div th:include="wikift-layout/common/wikift-layout-common-script-editor-html::common-script-editor-html"></div>
+        <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
+        <div class="card">
+            <div class="card-header bg-light-blue">
+                <div class="widget-calendar__year">请客观的对该文章发表一个有意义(有效)的评论</div>
+            </div>
+            <div class="card-block">
+                <div th:include="wikift-layout/common/wikift-layout-common-editor::common-editor-commnet"></div>
+            </div>
+        </div>
+    </div>
+    <div th:unless="${session.userInfo}">
+        <div class="card">
+            <div class="card-header bg-light-blue">
+                <div class="widget-calendar__year">
+                    <a th:href="@{/authentication/login}" style="color: white;">您当前尚未登录,登录后方可使用评论等功能!点我即可跳转到登录页面</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 评论编辑器 -->
+<div th:fragment="common-details-comment">
+    <div th:if="${session.userInfo}">
+        <div class="card">
+            <div class="messages__body">
+                <div class="messages__header">
+                    <div class="card-header bg-light-blue">
+                        <div class="widget-calendar__year">请客观的对该文章发表一个有意义(有效)的评论</div>
+                    </div>
+                </div>
+                <div class="messages__reply" style="background-color: #f1f1f1;">
+                    <textarea class="messages__reply__text publish-comment-content"
+                              placeholder="请输入要评论的内容(我支持Markdown语法哦)..."></textarea>
+                    <button class="btn btn-success btn--icon messages__reply__btn waves-effect btn-publish-comment"><i
+                            class="zmdi zmdi-mail-send"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:unless="${session.userInfo}">
+        <div class="card">
+            <div class="card-header bg-light-blue">
+                <div class="widget-calendar__year">
+                    <a th:href="@{/authentication/login}" style="color: white;">您当前尚未登录,登录后方可使用评论等功能!点我即可跳转到登录页面</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 评论列表 -->
+<div th:fragment="common-details-comment-list(commentCount, comments)">
+    <div class="messages__body">
+        <div class="messages__header">
+            <div class="toolbar toolbar--inner mb-0">
+                <div class="toolbar__label" th:text="${ commentCount + '条评论'}"></div>
+            </div>
+        </div>
+        <div class="messages__content">
+            <div th:if="${#arrays.length(comments) > 0}" th:each="comment, index : ${comments}" class="messages__item">
+                <img th:src="${comment.user.avatar}" class="messages__avatar" th:alt="${comment.user.aliasName}"/>
+                <div class="messages__details">
+                    <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${comment.id}, ${comment.content}, null)"></div>
+                    <small>
+                        <i class="zmdi zmdi-time"></i>
+                        <em th:text="${#dates.format(comment.createTime,'yyyy年MM月dd日 HH:mm:ss')}"></em>
+                    </small>
+                </div>
+            </div>
+            <div th:unless="${#arrays.length(comments) > 0}" class="center">
+                还没有评论哦
+            </div>
+        </div>
+    </div>
+</div>

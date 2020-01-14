@@ -1,0 +1,39 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-script">
+    <script th:src="@{/ws/wikift-vender/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/jquery/jquery.template.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/jquery/jquery.pagination.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/jquery/jquery.waves.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/bootstrap/bootstrap.tether.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/bootstrap/bootstrap.min.js}"></script>
+    <script th:src="@{/ws/wikift-js/wikift-common.js}"></script>
+    <!-- 站点工具脚本 -->
+    <script th:src="@{/ws/wikift-js/utils/wikift-utils-json.js}"></script>
+    <!-- 站点对象脚本 -->
+    <script th:src="@{/ws/wikift-js/entity/remote/wikift-remote-user-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/remote/wikift-remote-article-type-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/remote/wikift-remote-space-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/remote/wikift-remote-article-tag-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/remote/wikift-remote-article-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/remote/wikift-remote-comment-entity.js}"></script>
+    <!-- 编辑器组件 -->
+    <div th:include="wikift-layout/common/wikift-layout-common-script-editor-html::common-script-editor-html"></div>
+    <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
+</div>

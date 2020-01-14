@@ -1,0 +1,84 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="wikift-layout/common/wikift-layout-common-header::common-header(${details.data.title}, ${details.data.title})"></head>
+<div th:include="wikift-layout/common/wikift-layout-common-script::common-script"></div>
+<div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
+<body data-ma-theme="green">
+<div th:include="wikift-layout/common/wikift-layout-common-navigation::common-navigation(${details.data})"></div>
+<input type="hidden" id="website-access-article" th:value="${details.data.id}"/>
+<section class="content content--full">
+    <div class="row">
+        <div class="col-9">
+            <!-- 文章基本信息 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-description::common-details-description(${details.data}, ${details.data.articleType})"></div>
+            <!-- 文章内容 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${details.data.id}, ${details.data.content}, null)"></div>
+            <!-- 文章标签 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-tags::common-details-tags(${details.data.articleTags})"></div>
+            <!-- 评论编辑器 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment"></div>
+            <script>
+                $('.btn-publish-comment').click(function () {
+                    var notify = new WikiftNotifyEntity('错误', '文章内容不能为空!!!');
+                    var config = new WikiftNotifyConfigEntity();
+                    config.type = 'danger';
+                    config.icon = 'alert-triangle';
+                    var comment = $('.publish-comment-content').val();
+                    if (comment) {
+                        var userInfo = new WikiftRemoteUserEntity($('#website-access-user').val());
+                        var articleInfo = new WikiftRemoteArticleEntity($('#website-access-article').val());
+                        var commentInfo = new WikiftRemoteCommentEntity(null, comment, userInfo, articleInfo);
+                        $.ajax({
+                            type: "POST",
+                            url: "/comment/article/post",
+                            data: JSON.stringify(commentInfo),
+                            contentType: "application/json",
+                            success: function (result) {
+                                if (result.code > 0) {
+                                    notify.message = result.message;
+                                    WikiftCommonNotify.initNotify(notify, config);
+                                } else {
+                                    alert('评论发送成功!点击确定即可看到您的评论!!!');
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    } else {
+                        alert('评论内容不能为空!');
+                    }
+                });
+            </script>
+            <!-- 评论列表 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment-list(${comments.data.totalElements}, ${comments.data.content})"></div>
+            <!-- 文章尾部小工具 -->
+            <!--<div class="card-header bg-light-blue">-->
+            <!--<div class="widget-calendar__year"></div>-->
+            <!--<div class="widget-calendar__day"></div>-->
+            <!--</div>-->
+        </div>
+        <div class="col-3">
+            <div id="container">
+                <!--<div th:include="wikift-layout/common/wikift-layout-common-auto-catalog::common-auto-catalog"></div>-->
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-script-editor-html">
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/marked.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/prettify.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/raphael.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/underscore.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/sequence-diagram.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/flowchart.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/jquery.flowchart.min.js}"></script>
+    <div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
+</div>

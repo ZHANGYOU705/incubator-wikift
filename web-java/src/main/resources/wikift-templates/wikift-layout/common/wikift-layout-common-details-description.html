@@ -1,0 +1,40 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-details-description(details, type)">
+    <div class="toolbar">
+        <div class="toolbar__label">
+            <span class="badge badge-default hidden-xs-down" th:text="${type.name}"></span>
+            <em th:text="${#dates.format(details.createTime,'yyyy年MM月dd日 HH:mm:ss')}"></em>
+        </div>
+        <div class="actions">
+            <div class="dropdown actions__item" th:title="${'已有' + details.viewCount + '次访问'}"
+                 data-toggle="tooltip" data-placement="top">
+                <span><i class="zmdi zmdi-eye zmdi-hc-fw"></i></span>
+            </div>
+            <div class="dropdown actions__item" th:title="${'已有' + details.fabulouCount + '人点赞'}"
+                 data-toggle="tooltip" data-placement="top">
+                <span><i class="zmdi zmdi-eye zmdi-thumb-up"></i></span>
+            </div>
+            <div class="dropdown actions__item" th:title="${'已有' + details.commentsCount + '条评论'}"
+                 data-toggle="tooltip" data-placement="top">
+                <span><i class="zmdi zmdi-eye zmdi-comment"></i></span>
+            </div>
+        </div>
+    </div>
+</div>

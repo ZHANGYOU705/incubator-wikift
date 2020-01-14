@@ -1,0 +1,57 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-script-select2(id, result)">
+    <link rel="stylesheet" th:href="@{/ws/wikift-vender/css/select2/select2.min.css}">
+    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style-select2.css}">
+    <script th:src="@{/ws/wikift-vender/js/jquery/jquery.select2.full.min.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/wikift-select2-config-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/wikift-select2-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/common/wikift-common-select2.js}"></script>
+    <select class="select2" th:id="${id}">
+        <option th:each="value, index: ${result.data.content}" th:value="${value.id}" th:text="${value.name}"></option>
+    </select>
+    <!--<select class="select2" th:id="${id}"></select>-->
+    <!--<script id="select2Template" type="text/html">-->
+        <!--<%for(var i = 0; i < list.length; i++) {%>-->
+        <!--<option value="<%:=list[i].id%>"><%:=list[i].name%></option>-->
+        <!--<%}%>-->
+    <!--</script>-->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var select2parent = $('.select2-parent')[0] ? $('.select2-parent') : $('body');
+        var select2 = new WikiftSelect2Entity('select.select2');
+        var config = new WikiftSelect2ConfigEntity();
+        config.dropdownAutoWidth = true;
+        config.width = '100%';
+        config.dropdownParent = select2parent;
+        WikiftCommonSelect2.initSelect2(select2, config);
+        /*]]>*/
+    </script>
+    <!-- 不使用js模板引擎 -->
+    <!--<script th:inline="javascript">-->
+        <!--/*<![CDATA[*/-->
+        <!--var result = JSON.parse([[${result}]]);-->
+        <!--if (result.code === 0) {-->
+            <!--var templateContainer = document.getElementById('select2Template').innerHTML;-->
+            <!--var html = template(templateContainer, {list: result.data.content});-->
+            <!--document.getElementById([[${id}]]).innerHTML = html;-->
+        <!--}-->
+        <!--/*]]>*/-->
+    <!--</script>-->
+</div>

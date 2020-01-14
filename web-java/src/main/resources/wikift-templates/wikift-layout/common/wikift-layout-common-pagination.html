@@ -1,0 +1,48 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-pagination(root, result)">
+    <input type="hidden" id="totalElements" th:value="${result.data.totalElements}"/>
+    <input type="hidden" id="totalPages" th:value="${result.data.totalPages}"/>
+    <input type="hidden" id="number" th:value="${result.data.number}"/>
+    <input type="hidden" id="size" th:value="${result.data.size}"/>
+    <ul class="pagination justify-content-center mt-10"></ul>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $('.pagination').pagination({
+            mode: 'fixed',
+            coping: true,
+            homePage: '首页',
+            endPage: '末页',
+            prevContent: '上页',
+            nextContent: '下页',
+            totalData: $('#totalElements').val(),
+            pageCount: $('#totalPages').val(),
+            showData: $('#size').val(),
+            current: parseInt($('#number').val()) + 1,
+            callback: function (api) {
+                var currentRoot = window.document.location.href;
+                var pathName = window.document.location.pathname;
+                var pos = currentRoot.indexOf(pathName);
+                var localhostPath = currentRoot.substring(0, pos);
+                window.location.href = localhostPath + '/' + [[${root}]] + '/' + api.getCurrent() + '/' + $('#size').val();
+            }
+        });
+        /*]]>*/
+    </script>
+</div>

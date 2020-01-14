@@ -1,0 +1,35 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-details-tags(details)">
+    <div class="listview">
+        <div class="listview__item"></div>
+        <div class="listview__item">
+            <div class="listview__content">
+                <div class="listview__heading"
+                     th:text="${'当前文章共拥有以下' + #arrays.length(details) + '个标签'}"></div>
+                <div class="listview__attrs">
+                            <span th:each="tag, index : ${details}">
+                                <img class="widget-visitors__country" src="demo/img/flags/Australia.png" alt="">
+                                <span th:text="${tag.name}"></span>
+                            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
