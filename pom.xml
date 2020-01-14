@@ -35,17 +35,18 @@
 
     <!-- modules -->
     <modules>
-        <module>wikift-model</module>
-        <module>wikift-common</module>
-        <module>wikift-support</module>
-        <module>wikift-server</module>
-        <module>wikift-web</module>
-        <module>wikift-center</module>
-        <module>wikift-job</module>
-        <module>wikift-design</module>
-        <module>wikift-script</module>
-        <module>wikift-admin</module>
-        <module>wikift-test</module>
+        <module>model</module>
+        <module>common</module>
+        <module>support</module>
+        <module>server</module>
+        <module>web</module>
+        <module>center</module>
+        <module>job</module>
+        <module>design</module>
+        <module>script</module>
+        <module>admin</module>
+        <module>test</module>
+        <module>web-java</module>
     </modules>
 
     <!-- url -->
