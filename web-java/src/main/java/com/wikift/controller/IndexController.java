@@ -22,12 +22,18 @@ import com.wikift.common.HttpTemplate;
 import com.wikift.common.JsonTemplate;
 import com.wikift.common.PageTemplate;
 import com.wikift.common.WikiftConstant;
+import com.wikift.common.utils.PageAndSortUtils;
 import com.wikift.entity.RemoteServerEntity;
+import com.wikift.model.article.ArticleEntity;
+import com.wikift.model.enums.OrderEnums;
+import com.wikift.support.service.article.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,16 +65,23 @@ public class IndexController {
     @Autowired
     private WikiftCacheManager cacheManager;
 
+    @Autowired
+    private ArticleService articleService;
+
     @RequestMapping(value = {"", "/{page}/{size}"}, method = RequestMethod.GET)
     public String index(Model model,
                         @PathVariable(value = "page", required = false) Integer page,
                         @PathVariable(value = "size", required = false) Integer size) {
-        PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
-        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String latest = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
-                "public/article/list?orderBy=NATIVE_CREATE_TIME&page=" + (pageEntity.getPage() - 1)
-                + "&size=" + pageEntity.getSize());
-        model.addAttribute("latest", jsonTemplate.getJsonObject(latest));
+        if (ObjectUtils.isEmpty(page)) {
+            page = 1;
+        }
+        if (ObjectUtils.isEmpty(size)) {
+            size = 10;
+        }
+        Page<ArticleEntity> entitys = this.articleService.findAll(OrderEnums.NATIVE_CREATE_TIME, PageAndSortUtils.getPage(page, size));
+        model.addAttribute("datas", entitys);
+        model.addAttribute("number", page);
+        model.addAttribute("size", size);
         return WikiftConstant.TEMPLATE_INDEX_AND_ROOT_PAGE_PATH;
     }
 
@@ -82,11 +95,10 @@ public class IndexController {
                                 @PathVariable(value = "page", required = false) Integer page,
                                 @PathVariable(value = "size", required = false) Integer size) {
         PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
-        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String hottest = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
-                "public/article/list?orderBy=VIEW&page=" + (pageEntity.getPage() - 1)
-                + "&size=" + pageEntity.getSize());
-        model.addAttribute("hottest", jsonTemplate.getJsonObject(hottest));
+        Page<ArticleEntity> entitys = this.articleService.findAll(OrderEnums.VIEW, PageAndSortUtils.getPage(pageEntity.getPage(), pageEntity.getSize()));
+        model.addAttribute("datas", entitys);
+//        model.addAttribute("number", page);
+//        model.addAttribute("size", size);
         return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "hottest";
     }
 
@@ -95,11 +107,8 @@ public class IndexController {
                                   @PathVariable(value = "page", required = false) Integer page,
                                   @PathVariable(value = "size", required = false) Integer size) {
         PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
-        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String recommend = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
-                "public/article/list?orderBy=FABULOU&page=" + (pageEntity.getPage() - 1)
-                + "&size=" + pageEntity.getSize());
-        model.addAttribute("recommend", jsonTemplate.getJsonObject(recommend));
+        Page<ArticleEntity> entitys = this.articleService.findAll(OrderEnums.FABULOU, PageAndSortUtils.getPage(pageEntity.getPage(), pageEntity.getSize()));
+        model.addAttribute("datas", entitys);
         return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "recommend";
     }
 

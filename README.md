@@ -1,5 +1,7 @@
 # wikift
 
+> 注意由于SEO问题，我们将弃用基于Angular的可视化Web服务，我们使用基于服务器的渲染为了更好的展现SEO功能！！！
+
 wikift是一套开源的易用的知识管理系统.
 
 # Contact us

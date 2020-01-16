@@ -23,6 +23,7 @@ import com.wikift.cache.WikiftCacheManager;
 import com.wikift.common.HttpTemplate;
 import com.wikift.common.WikiftConstant;
 import com.wikift.entity.RemoteServerEntity;
+import com.wikift.support.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -57,6 +58,9 @@ public class WikiftAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Autowired
     private WikiftCacheManager cacheManager;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

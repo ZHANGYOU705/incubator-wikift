@@ -33,7 +33,7 @@
         <!-- 文章标题用户信息 -->
         <div th:unless="${description == null}" class="user__header">
             <div class="user__header__info" data-toggle="dropdown">
-                <img class="user__header__img" th:src="${description.user.avatar}" alt="${description.user.username}"/>
+                <img class="user__header__img" th:src="${description.user.avatar}" th:alt="${description.user.username}"/>
                 <div>
                     <div class="user__header__name" th:text="${description.user.aliasName}"></div>
                     <div class="user__header__email">

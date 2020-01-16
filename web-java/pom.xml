@@ -76,6 +76,14 @@
             <artifactId>fastjson</artifactId>
             <version>${dependency.fastjson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.wikift</groupId>
+            <artifactId>wikift-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

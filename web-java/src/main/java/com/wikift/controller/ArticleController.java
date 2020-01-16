@@ -17,11 +17,13 @@
  */
 package com.wikift.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.wikift.common.HttpTemplate;
 import com.wikift.common.JsonTemplate;
 import com.wikift.common.WikiftConstant;
-import com.wikift.entity.RemoteServerEntity;
+import com.wikift.common.utils.PageAndSortUtils;
+import com.wikift.model.article.ArticleEntity;
+import com.wikift.support.service.article.ArticleService;
+import com.wikift.support.service.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -51,20 +53,18 @@ public class ArticleController {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private CommentService commentService;
+
     @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
-    public String info(Model model,
-                       @PathVariable(value = "id") Integer id) {
-        String accessInfo = "public/article/info/" + id;
-        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + accessInfo);
-        JSONObject details = jsonTemplate.getJsonObject(result);
-        model.addAttribute("details", details);
+    public String info(Model model, @PathVariable(value = "id") Integer id) {
+        ArticleEntity entity = this.articleService.getArticle(Long.valueOf(id));
+        model.addAttribute("details", entity);
         // 文章评论信息
-        Integer detailsId = details.getJSONObject("data").getInteger("id");
-        String commentPath = "public/comment/list?articleId=" + detailsId;
-        String commentResult = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + commentPath);
-        JSONObject comments = jsonTemplate.getJsonObject(commentResult);
-        model.addAttribute("comments", comments);
+        model.addAttribute("comments", commentService.getAllCommentByArticle(entity, PageAndSortUtils.getPageAndSortAndCreateTimeByDESC(0, 20)));
         return WikiftConstant.TEMPLATE_ARTICLE_PAGE_PATH + "details";
     }
 

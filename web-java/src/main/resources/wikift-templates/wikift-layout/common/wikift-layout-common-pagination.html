@@ -17,10 +17,10 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div th:fragment="common-pagination(root, result)">
-    <input type="hidden" id="totalElements" th:value="${result.data.totalElements}"/>
-    <input type="hidden" id="totalPages" th:value="${result.data.totalPages}"/>
-    <input type="hidden" id="number" th:value="${result.data.number}"/>
-    <input type="hidden" id="size" th:value="${result.data.size}"/>
+    <input type="hidden" id="totalElements" th:value="${result.totalElements}"/>
+    <input type="hidden" id="totalPages" th:value="${result.totalPages - 1}"/>
+    <input type="hidden" id="number" th:value="${result.number}"/>
+    <input type="hidden" id="size" th:value="${result.size}"/>
     <ul class="pagination justify-content-center mt-10"></ul>
     <script th:inline="javascript">
         /*<![CDATA[*/
@@ -34,7 +34,7 @@
             totalData: $('#totalElements').val(),
             pageCount: $('#totalPages').val(),
             showData: $('#size').val(),
-            current: parseInt($('#number').val()) + 1,
+            current: parseInt($('#number').val()),
             callback: function (api) {
                 var currentRoot = window.document.location.href;
                 var pathName = window.document.location.pathname;

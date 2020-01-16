@@ -17,21 +17,21 @@
 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:include="wikift-layout/common/wikift-layout-common-header::common-header(${details.data.title}, ${details.data.title})"></head>
+<head th:include="wikift-layout/common/wikift-layout-common-header::common-header(${details.title}, ${details.title})"></head>
 <div th:include="wikift-layout/common/wikift-layout-common-script::common-script"></div>
 <div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
 <body data-ma-theme="green">
-<div th:include="wikift-layout/common/wikift-layout-common-navigation::common-navigation(${details.data})"></div>
-<input type="hidden" id="website-access-article" th:value="${details.data.id}"/>
+<div th:include="wikift-layout/common/wikift-layout-common-navigation::common-navigation(${details})"></div>
+<input type="hidden" id="website-access-article" th:value="${details.id}"/>
 <section class="content content--full">
     <div class="row">
         <div class="col-9">
             <!-- 文章基本信息 -->
-            <div th:include="wikift-layout/common/wikift-layout-common-details-description::common-details-description(${details.data}, ${details.data.articleType})"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-details-description::common-details-description(${details}, ${details.articleType})"></div>
             <!-- 文章内容 -->
-            <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${details.data.id}, ${details.data.content}, null)"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${details.id}, ${details.content}, null)"></div>
             <!-- 文章标签 -->
-            <div th:include="wikift-layout/common/wikift-layout-common-details-tags::common-details-tags(${details.data.articleTags})"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-details-tags::common-details-tags(${details.articleTags})"></div>
             <!-- 评论编辑器 -->
             <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment"></div>
             <script>
@@ -66,7 +66,7 @@
                 });
             </script>
             <!-- 评论列表 -->
-            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment-list(${comments.data.totalElements}, ${comments.data.content})"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment-list(${comments.totalElements}, ${comments.content})"></div>
             <!-- 文章尾部小工具 -->
             <!--<div class="card-header bg-light-blue">-->
             <!--<div class="widget-calendar__year"></div>-->

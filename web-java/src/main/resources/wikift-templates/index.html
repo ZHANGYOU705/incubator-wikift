@@ -28,8 +28,8 @@
     <div class="row">
         <div class="col-md-9">
             <div th:include="wikift-layout/index/wikift-layout-index-navbar::index-navbar(1)"></div>
-            <div th:include="wikift-layout/index/wikift-layout-index-navbar-data::index-navbar-data(${latest})"></div>
-            <div th:include="wikift-layout/common/wikift-layout-common-pagination::common-pagination('index', ${latest})"></div>
+            <div th:include="wikift-layout/index/wikift-layout-index-navbar-data::index-navbar-data(${datas})"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-pagination::common-pagination('index', ${datas})"></div>
         </div>
         <div class="col-md-3">
         </div>

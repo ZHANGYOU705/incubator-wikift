@@ -17,7 +17,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div th:fragment="index-navbar-data(result)" class="tab-container">
-    <div th:each="article, index : ${result.data.content}" class="listview listview--hover">
+    <div th:each="article, index : ${datas}" class="listview listview--hover">
         <a class="listview__item" th:target="_blank" th:href="@{'/' + ${article.user.username} + '/article/details/' + ${article.id}}">
             <img th:src="${article.user.avatar}" th:alt="${article.user.username}" class="listview__img"/>
             <div class="listview__content">
