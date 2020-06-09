@@ -18,8 +18,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>wikift</artifactId>
-        <groupId>com.wikift</groupId>
+        <groupId>io.edurt.wikift</groupId>
+        <artifactId>incubator-wikift</artifactId>
         <version>1.5.0</version>
     </parent>
 

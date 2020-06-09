@@ -18,39 +18,26 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wikift</groupId>
-    <artifactId>wikift</artifactId>
+    <groupId>io.edurt.wikift</groupId>
+    <artifactId>incubator-wikift</artifactId>
     <packaging>pom</packaging>
 
-    <name>wikift</name>
+    <name>Wikift Parent Pom</name>
     <version>1.5.0</version>
     <description>Wikift is a wiki system</description>
 
-    <!-- modules -->
     <modules>
-        <module>model</module>
-        <module>common</module>
-        <module>support</module>
+        <module>assembly</module>
         <module>server</module>
         <module>web</module>
-        <module>center</module>
-        <module>job</module>
-        <module>design</module>
-        <module>script</module>
-        <module>admin</module>
-        <module>test</module>
-        <module>web-java</module>
     </modules>
 
-    <!-- url -->
     <url>https://wikift.incubator.edurt.io</url>
 
-    <!-- scm -->
     <scm>
         <url>https://github.com/wikift/wikift</url>
     </scm>
 
-    <!-- licenses -->
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -59,7 +46,6 @@
         </license>
     </licenses>
 
-    <!-- developer -->
     <developers>
         <developer>
             <name>qianmoQ</name>
@@ -69,72 +55,31 @@
         </developer>
     </developers>
 
-    <!-- organization -->
     <organization>
         <name>Apache Software Foundation</name>
         <url>http://www.apache.org</url>
     </organization>
 
-    <!-- issueManagement -->
     <issueManagement>
     </issueManagement>
 
-    <!-- properties -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- system version -->
         <java.version>1.8</java.version>
-        <!-- plugins version -->
         <plugin.maven.compiler.version>3.2</plugin.maven.compiler.version>
-        <plugin.frontend.version>1.6</plugin.frontend.version>
-        <plugin.springboot.version>1.1.8.RELEASE</plugin.springboot.version>
         <plugin.docker.version>0.23.0</plugin.docker.version>
-        <!-- dependency -->
+        <plugin.assembly.version>2.5.5</plugin.assembly.version>
         <dependency.jersey.version>1.19.4</dependency.jersey.version>
         <dependency.guice.version>4.2.3</dependency.guice.version>
         <dependency.jetty.version>9.4.29.v20200521</dependency.jetty.version>
         <dependency.jaxb.version>2.3.1</dependency.jaxb.version>
-        <spring.security.version>1.5.9.RELEASE</spring.security.version>
-        <spring.security.jwt.version>1.0.8.RELEASE</spring.security.jwt.version>
-        <spring.security.oauth2.version>2.1.1.RELEASE</spring.security.oauth2.version>
-        <lombok.version>1.16.16</lombok.version>
-        <jackson.databind.version>2.8.6</jackson.databind.version>
-        <mysql.version>5.1.42</mysql.version>
-        <google.collections.version>1.0-rc2</google.collections.version>
-        <apacheds.server.jndi.version>1.5.5</apacheds.server.jndi.version>
-        <spring.data.commons.version>1.13.9.RELEASE</spring.data.commons.version>
+        <dependency.lombok.version>1.16.16</dependency.lombok.version>
         <docker.image.prefix>wikift</docker.image.prefix>
     </properties>
 
-    <!-- dependencyManagement -->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.wikift</groupId>
-                <artifactId>wikift-model</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.wikift</groupId>
-                <artifactId>wikift-support</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.wikift</groupId>
-                <artifactId>wikift-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.wikift</groupId>
-                <artifactId>wikift-job</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.wikift</groupId>
-                <artifactId>wikift-support-com.wikift.support.ldap</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <!-- jersey -->
             <dependency>
                 <groupId>com.sun.jersey</groupId>
@@ -184,85 +129,28 @@
                 <artifactId>jaxb-runtime</artifactId>
                 <version>${dependency.jaxb.version}</version>
             </dependency>
-
+            <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.databind.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.collections</groupId>
-                <artifactId>google-collections</artifactId>
-                <version>${google.collections.version}</version>
-            </dependency>
-            <dependency>
-                <!-- Is the ApacheDS server; as noted above, 1.5.6 and 1.5.7 don't work -->
-                <groupId>org.apache.directory.server</groupId>
-                <artifactId>apacheds-server-jndi</artifactId>
-                <version>${apacheds.server.jndi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-commons</artifactId>
-                <version>${spring.data.commons.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-collections4</artifactId>
-                <version>4.2</version>
+                <version>${dependency.lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <!-- pluginRepositories -->
     <pluginRepositories>
     </pluginRepositories>
 
-    <!-- distributionManagement -->
     <distributionManagement>
     </distributionManagement>
 
-    <!-- repositories -->
     <repositories>
     </repositories>
 
-    <!-- build -->
     <build>
         <pluginManagement>
-            <plugins>
-                <!-- 构建可执行jar -->
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${plugin.springboot.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <!-- docker -->
-                <plugin>
-                    <groupId>io.fabric8</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>${plugin.docker.version}</version>
-                </plugin>
-            </plugins>
         </pluginManagement>
         <plugins>
-            <!-- maven compile -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -275,7 +163,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.5</version>
+                <version>${plugin.assembly.version}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <appendAssemblyId>false</appendAssemblyId>
