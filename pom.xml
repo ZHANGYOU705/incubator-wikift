@@ -18,13 +18,6 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.9.RELEASE</version>
-        <relativePath/>
-    </parent>
-
     <groupId>com.wikift</groupId>
     <artifactId>wikift</artifactId>
     <packaging>pom</packaging>
@@ -50,7 +43,7 @@
     </modules>
 
     <!-- url -->
-    <url>http://www.wikift.com</url>
+    <url>https://wikift.incubator.edurt.io</url>
 
     <!-- scm -->
     <scm>
@@ -84,8 +77,6 @@
 
     <!-- issueManagement -->
     <issueManagement>
-        <system>jira</system>
-        <url>http://jira.ttxit.com/projects/WIKIFT</url>
     </issueManagement>
 
     <!-- properties -->
@@ -99,8 +90,11 @@
         <plugin.frontend.version>1.6</plugin.frontend.version>
         <plugin.springboot.version>1.1.8.RELEASE</plugin.springboot.version>
         <plugin.docker.version>0.23.0</plugin.docker.version>
-        <!-- dependencie version -->
-        <spring.boot.version>1.5.6.RELEASE</spring.boot.version>
+        <!-- dependency -->
+        <dependency.jersey.version>1.19.4</dependency.jersey.version>
+        <dependency.guice.version>4.2.3</dependency.guice.version>
+        <dependency.jetty.version>9.4.29.v20200521</dependency.jetty.version>
+        <dependency.jaxb.version>2.3.1</dependency.jaxb.version>
         <spring.security.version>1.5.9.RELEASE</spring.security.version>
         <spring.security.jwt.version>1.0.8.RELEASE</spring.security.jwt.version>
         <spring.security.oauth2.version>2.1.1.RELEASE</spring.security.oauth2.version>
@@ -141,33 +135,56 @@
                 <artifactId>wikift-support-com.wikift.support.ldap</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- spring boot -->
+            <!-- jersey -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.boot.version}</version>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>${dependency.jersey.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-devtools</artifactId>
-                <version>${spring.boot.version}</version>
-                <scope>runtime</scope>
+                <groupId>com.sun.jersey.contribs</groupId>
+                <artifactId>jersey-guice</artifactId>
+                <version>${dependency.jersey.version}</version>
+            </dependency>
+            <!-- guice -->
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${dependency.guice.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-                <version>${spring.security.version}</version>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-servlet</artifactId>
+                <version>${dependency.guice.version}</version>
+            </dependency>
+            <!-- jetty -->
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
+                <version>${dependency.jetty.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth2</artifactId>
-                <version>${spring.security.oauth2.version}</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-servlet</artifactId>
+                <version>${dependency.jetty.version}</version>
+            </dependency>
+            <!-- jaxb -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${dependency.jaxb.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-jwt</artifactId>
-                <version>${spring.security.jwt.version}</version>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${dependency.jaxb.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>${dependency.jaxb.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

@@ -1,0 +1,1 @@
+package io.edurt.wikift.server.controller;
